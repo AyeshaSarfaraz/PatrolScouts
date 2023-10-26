@@ -4,3 +4,8 @@ sudo apt install -y python3-pyqt5 python3-prctl libatlas-base-dev ffmpeg python3
 pip3 install numpy --upgrade
 pip3 install picamera2[gui]
 pip install ultralytics
+
+
+
+pip install pymavlink
+pip install dronekit
