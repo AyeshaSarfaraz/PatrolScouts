@@ -18,7 +18,8 @@ def getLocationPix():
     except:
         print('No GPS_RAW_INT message received')
     
-    return f"Coordinates: {coordinate[0]}, {coordinate[1]}"
+    if coordinate:
+        return f"Coordinates: {coordinate[0]}, {coordinate[1]}"
 
 
 
