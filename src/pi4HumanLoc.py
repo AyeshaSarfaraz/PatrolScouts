@@ -9,6 +9,10 @@ def getLocationPix():
     coordinate = []
     
     try:
+        the_connection = mavutil.mavlink_connection('/dev/serial0', BAUDRATE)
+        the_connection.wait_heartbeat()
+        print("Heartbeat from system (system %u component %u)" % (the_connection.target_system, the_connection.target_component))
+
         longitude =  the_connection.messages['GPS_RAW_INT'].lon
         latitude =  the_connection.messages['GPS_RAW_INT'].lat
         timestamp = the_connection.time_since('GPS_RAW_INT')
@@ -21,11 +25,6 @@ def getLocationPix():
     if coordinate:
         return f"Coordinates: {coordinate[0]}, {coordinate[1]}"
 
-
-
-the_connection = mavutil.mavlink_connection('/dev/serial0', BAUDRATE)
-the_connection.wait_heartbeat()
-print("Heartbeat from system (system %u component %u)" % (the_connection.target_system, the_connection.target_component))
 
 
 piSocket = socket(AF_INET, SOCK_STREAM)
