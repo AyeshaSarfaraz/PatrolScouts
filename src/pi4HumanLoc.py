@@ -7,17 +7,17 @@ BAUDRATE = 57600
 
 def getLocationPix():
     coordinate = []
-    while True:
-        try:
-            longitude =  the_connection.messages['GPS_RAW_INT'].lon
-            latitude =  the_connection.messages['GPS_RAW_INT'].lat
-            timestamp = the_connection.time_since('GPS_RAW_INT')
-            coordinate.append(latitude/100)
-            coordinate.append(longitude/100)
-            print(f"Coordinates: {coordinate}")
-            break
-        except:
-            print('No GPS_RAW_INT message received')
+    
+    try:
+        longitude =  the_connection.messages['GPS_RAW_INT'].lon
+        latitude =  the_connection.messages['GPS_RAW_INT'].lat
+        timestamp = the_connection.time_since('GPS_RAW_INT')
+        coordinate.append(latitude/100)
+        coordinate.append(longitude/100)
+        print(f"Coordinates: {coordinate}")
+    except:
+        print('No GPS_RAW_INT message received')
+    
     return f"Coordinates: {coordinate[0]}, {coordinate[1]}"
 
 
