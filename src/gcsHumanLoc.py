@@ -1,5 +1,5 @@
 from ultralytics import YOLO
-from pymavlink import mavutil
+
 from socket import *
 
 
@@ -42,3 +42,6 @@ def humanDetect():
                 for detectionConf in boxes.conf.tolist():
                     if detectionConf >= ACCEPTEDCONF:
                         requestLoc()
+
+
+humanDetect()
