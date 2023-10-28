@@ -7,7 +7,7 @@ from picamera2.outputs import FileOutput
 
 picam2 = Picamera2()
 video_config = picam2.create_video_configuration({"size": (480, 270)})
-video_config.controls.FrameRate = 20.0
+picam2.video_configuration.controls.FrameRate = 20.0
 picam2.configure(video_config)
 encoder = H264Encoder(40000000, False, 10)
 
