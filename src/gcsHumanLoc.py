@@ -29,6 +29,8 @@ def requestLoc(gcsSocket):
     print('**************************************************************************')
     print('**************************************************************************')
 
+    return True
+
     
 
 def humanDetect():
@@ -50,9 +52,9 @@ def humanDetect():
             if len(boxes.conf.tolist()) > 0:
                 for detectionConf in boxes.conf.tolist():
                     if detectionConf >= ACCEPTEDCONF:
-                        requestLoc(gcsSocket)
+                        while not requestLoc(gcsSocket):
+                            continue
             
-            sleep(30)
 
 
 

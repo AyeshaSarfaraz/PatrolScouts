@@ -45,6 +45,7 @@ def getLocationPix(pixConnection):
         #lonStr = lonStr[:2] + '.' + lonStr[2:]
         #return f"Coordinates: {latStr}, {lonStr}"
         return str(pixConnection.location.global_relative_frame)
+    else: return "Coordinates not received"
 
 
 
