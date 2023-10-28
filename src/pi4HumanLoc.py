@@ -53,7 +53,7 @@ piSocket = socket(AF_INET, SOCK_STREAM)
 piSocket.bind((PI4NAME, PI4PORT))
 piSocket.listen(1)
 
-print('The PI4 is ready to receive requests')
+
 
 try:
     pixConnection = createPixConnection()
@@ -61,8 +61,9 @@ except:
     print('Could not establish connection with PixHawk')
     quit()
 
+print('The PI4 is ready to receive requests')
 connectionSocket, ConnectionAddr = piSocket.accept()
-
+print('The PI4 have accepted the connection')
 while True:
     request = connectionSocket.recv(1024)
     request = request.decode()
