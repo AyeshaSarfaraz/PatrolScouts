@@ -8,12 +8,11 @@ ACCEPTEDCONF = 0.5
 PI4NAME = 'umbertopi.local'
 PI4PORT = 1530
 
+gcsSocket = socket(AF_INET, SOCK_STREAM)
+gcsSocket.connect((PI4NAME, PI4PORT))
+request = 'GET LOCATION'
+
 def requestLoc():
-    gcsSocket = socket(AF_INET, SOCK_STREAM)
-    gcsSocket.connect((PI4NAME, PI4PORT))
-
-    request = 'GET LOCATION'
-
     gcsSocket.send(request.encode())
 
     locObtainedFromPi = gcsSocket.recv(1024)
@@ -26,13 +25,15 @@ def requestLoc():
     print('**************************************************************************')
     print('**************************************************************************')
 
-    gcsSocket.close()
+    
 
 def humanDetect():
     model = YOLO('yolov8n.pt')
     results = model('tcp://umbertopi.local:1430', show=True, classes=0, stream=True)
     #results = model(0,show=True, classes=0, stream=True)
     while True:
+        if KeyboardInterrupt:
+            gcsSocket.close()
         for result in results:
             boxes = result.boxes
             probs = result.probs

@@ -1,26 +1,30 @@
 from socket import *
 from pymavlink import mavutil
+from time import sleep
 
 PI4NAME = 'umbertopi.local'
 PI4PORT = 1530
 BAUDRATE = 57600
 
+the_connection = mavutil.mavlink_connection('/dev/serial0', BAUDRATE)
+the_connection.wait_heartbeat()
+print("Heartbeat from system (system %u component %u)" % (the_connection.target_system, the_connection.target_component))
+    
+
 def getLocationPix():
     coordinate = []
-    
-    try:
-        the_connection = mavutil.mavlink_connection('/dev/serial0', BAUDRATE)
-        the_connection.wait_heartbeat()
-        print("Heartbeat from system (system %u component %u)" % (the_connection.target_system, the_connection.target_component))
-
-        longitude =  the_connection.messages['GPS_RAW_INT'].lon
-        latitude =  the_connection.messages['GPS_RAW_INT'].lat
-        timestamp = the_connection.time_since('GPS_RAW_INT')
-        coordinate.append(latitude/100)
-        coordinate.append(longitude/100)
-        print(f"Coordinates: {coordinate}")
-    except:
-        print('No GPS_RAW_INT message received')
+    while True:
+        try:
+            
+            longitude =  the_connection.messages['GPS_RAW_INT'].lon
+            latitude =  the_connection.messages['GPS_RAW_INT'].lat
+            timestamp = the_connection.time_since('GPS_RAW_INT')
+            coordinate.append(latitude/100)
+            coordinate.append(longitude/100)
+            print(f"Coordinates: {coordinate}")
+        except:
+            print('No GPS_RAW_INT message received')
+            sleep(1)
     
     if coordinate:
         return f"Coordinates: {coordinate[0]}, {coordinate[1]}"
