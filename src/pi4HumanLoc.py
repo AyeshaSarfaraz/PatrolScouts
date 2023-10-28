@@ -61,9 +61,9 @@ except:
     print('Could not establish connection with PixHawk')
     quit()
 
-while True:
-    connectionSocket, ConnectionAddr = piSocket.accept()
+connectionSocket, ConnectionAddr = piSocket.accept()
 
+while True:
     request = connectionSocket.recv(1024)
     request = request.decode()
 
@@ -71,6 +71,6 @@ while True:
         locObtained = getLocationPix(pixConnection)
         connectionSocket.send(locObtained.encode())
     
-    connectionSocket.close()
+    #connectionSocket.close()
 
 

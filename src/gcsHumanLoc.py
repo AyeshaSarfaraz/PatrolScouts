@@ -13,7 +13,12 @@ request = 'GET LOCATION'
 
 def createSocket():
     gcsSocket = socket(AF_INET, SOCK_STREAM)
-    gcsSocket.connect((PI4NAME, PI4PORT))
+    try:
+        gcsSocket.connect((PI4NAME, PI4PORT))
+    except ConnectionRefusedError as e:
+        print(f"Connection to {PI4NAME}:{PI4PORT} refused: {e}")
+    except Exception as e:
+        print(f"An error occurred while connecting: {e}")
     return gcsSocket
 
 def requestLoc(gcsSocket):
@@ -54,6 +59,7 @@ def humanDetect():
                     if detectionConf >= ACCEPTEDCONF:
                         while not requestLoc(gcsSocket):
                             continue
+                    break
             
 
 
