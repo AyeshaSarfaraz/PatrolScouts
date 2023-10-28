@@ -1,5 +1,5 @@
 from ultralytics import YOLO
-
+from time import sleep
 from socket import *
 
 
@@ -51,6 +51,9 @@ def humanDetect():
                 for detectionConf in boxes.conf.tolist():
                     if detectionConf >= ACCEPTEDCONF:
                         requestLoc(gcsSocket)
+            
+            sleep(30)
+
 
 
 humanDetect()
