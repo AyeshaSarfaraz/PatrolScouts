@@ -1,5 +1,5 @@
 from socket import *
-from pymavlink import mavutil
+#from pymavlink import mavutil
 from dronekit import connect, VehicleMode
 from time import sleep
 
