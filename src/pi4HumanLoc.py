@@ -3,7 +3,7 @@ from socket import *
 from dronekit import connect, VehicleMode
 from time import sleep
 
-PI4NAME = 'umbertopi.local'
+PI4NAME = 'milopi.local'
 PI4PORT = 1530
 BAUDRATE = 57600
 connection_string = "/dev/serial0"

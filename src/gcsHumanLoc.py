@@ -5,7 +5,7 @@ from socket import *
 
 ACCEPTEDCONF = 0.5
 
-PI4NAME = 'umbertopi.local'
+PI4NAME = 'milopi.local'
 PI4PORT = 1530
 
 
@@ -40,7 +40,7 @@ def requestLoc(gcsSocket):
 
 def humanDetect():
     model = YOLO('yolov8n.pt')
-    results = model('tcp://umbertopi.local:1430', show=True, classes=0, stream=True)
+    results = model('tcp://milopi.local:1432', show=True, classes=0, stream=True)
     #results = model(0,show=True, classes=0, stream=True)
     try:
         gcsSocket = createSocket()
